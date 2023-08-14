@@ -7,17 +7,18 @@ export default function ProductForm({
   title: existingTitle,
   description: existingDescription,
   price: existingPrice,
-  images,
+  images: existingImages,
 }) {
+  const [images, setImages] = useState(existingImages || []);
   const [title, setTitle] = useState(existingTitle || "");
   const [description, setDescription] = useState(existingDescription || "");
   const [price, setPrice] = useState(existingPrice || "");
   const [goToProducts, setGoToProducts] = useState(false);
   const router = useRouter();
 
-  async function createProduct(event) {
+  async function saveProduct(event) {
     event.preventDefault();
-    const data = { title, description, price };
+    const data = { title, description, price, images };
 
     if (_id) {
       //update
@@ -36,13 +37,18 @@ export default function ProductForm({
     const files = event.target?.files;
     if (files?.length > 0) {
       const data = new FormData();
-      files.forEach((file) => data.append("file", file));
+      for (const file of files) {
+        data.append("file", file);
+      }
       const res = await axios.post("/api/upload", data);
+      setImages((oldImages) => {
+        return [...oldImages, ...res.data.links];
+      });
     }
   }
 
   return (
-    <form onSubmit={createProduct}>
+    <form onSubmit={saveProduct}>
       <label>Product Name</label>
       <input
         type="text"
@@ -51,8 +57,14 @@ export default function ProductForm({
         onChange={(event) => setTitle(event.target.value)}
       />
       <label>Photos </label>
-      <div className="mb-2">
-        <label className="w-24 h-24 cursor-pointer flex items-center justify-center text-sm gap-1 text-black-500 rounded-lg bg-gray-300">
+      <div className="mb-2 flex flex-wrap gap-2">
+        {!!images?.length &&
+          images.map((link) => (
+            <div key={link} className="inline-block h-24">
+              <img src={link} alt="" className="rounded-lg"></img>
+            </div>
+          ))}
+        <label className="w-24 h-24 cursor-pointer inline-block flex items-center justify-center text-sm gap-1 text-black-500 rounded-lg bg-gray-300">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
