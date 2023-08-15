@@ -21,11 +21,11 @@ export default function Products() {
         Add new Product
       </Link>
       <table className="basic mt-2">
-        <thread>
+        <thead>
           <tr>
             <td>Product Name</td>
           </tr>
-        </thread>
+        </thead>
         <tbody>
           {products.map((product) => (
             <tr key={product._id}>

@@ -119,12 +119,14 @@ export default function ProductForm({
         <option value="">Uncategorized</option>
         {categories.length > 0 &&
           categories.map((category) => (
-            <option value={category._id}>{category.name}</option>
+            <option key={category._id} value={category._id}>
+              {category.name}
+            </option>
           ))}
       </select>
       {propertiesToFill.length > 0 &&
         propertiesToFill.map((property) => (
-          <div className="flex gap-1">
+          <div className="flex gap-1" key={property.name}>
             <div>{property.name}</div>
             <select
               value={productProperties[property.name]}
@@ -133,7 +135,9 @@ export default function ProductForm({
               }
             >
               {property.values.map((value) => (
-                <option value={value}>{value}</option>
+                <option key={value} value={value}>
+                  {value}
+                </option>
               ))}
             </select>
           </div>

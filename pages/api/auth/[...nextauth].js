@@ -5,7 +5,7 @@ import GoogleProvider from "next-auth/providers/google";
 
 const adminEmails = ["harrisbe@sonoma.edu"];
 
-export default NextAuth({
+export const authenticationOptions = {
   providers: [
     GoogleProvider({
       clientId: process.env.GOOGLE_ID,
@@ -22,4 +22,6 @@ export default NextAuth({
       }
     },
   },
-});
+};
+
+export default NextAuth(authenticationOptions);
