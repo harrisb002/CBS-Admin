@@ -10,6 +10,7 @@ export default function ProductForm({
   description: existingDescription,
   price: existingPrice,
   category: existingCategory,
+  properties: assignedProperties,
   images: existingImages,
 }) {
   const [title, setTitle] = useState(existingTitle || "");
@@ -17,10 +18,12 @@ export default function ProductForm({
   const [price, setPrice] = useState(existingPrice || "");
   const [images, setImages] = useState(existingImages || []);
   const [category, setCategory] = useState(existingCategory || "");
-
-  const [goToProducts, setGoToProducts] = useState(false);
-  const [isUploading, setIsUploading] = useState(false);
   const [categories, setCategories] = useState([]);
+  const [goToProducts, setGoToProducts] = useState(false);
+  const [productProperties, setProductProperties] = useState(
+    assignedProperties || {}
+  );
+  const [isUploading, setIsUploading] = useState(false);
 
   const router = useRouter();
 
@@ -32,7 +35,14 @@ export default function ProductForm({
 
   async function saveProduct(event) {
     event.preventDefault();
-    const data = { title, description, price, category, images };
+    const data = {
+      title,
+      description,
+      price,
+      category,
+      properties: productProperties,
+      images,
+    };
 
     if (_id) {
       //update
@@ -67,6 +77,31 @@ export default function ProductForm({
     setImages(images);
   }
 
+  function setProductProperty(propertyName, value) {
+    setProductProperties((prev) => {
+      const newProductProps = { ...prev };
+      newProductProps[propertyName] = value;
+      return newProductProps;
+    });
+  }
+
+  const propertiesToFill = [];
+  //category is just an id, check if selected category has a parent. If so find it
+  if (categories.length > 0 && category) {
+    let categoryInfo = categories.find(({ _id }) => _id === category);
+    propertiesToFill.push(...categoryInfo.properties);
+
+    //If selected category has parent category, add properties to child category
+    while (categoryInfo?.parent?._id) {
+      const parentCategory = categories.find(
+        ({ _id }) => _id === categoryInfo?.parent?._id
+      );
+      propertiesToFill.push(...parentCategory.properties);
+      //Change categoryInfo so while isnt infinite loop
+      categoryInfo = parentCategory;
+    }
+  }
+
   return (
     <form onSubmit={saveProduct}>
       <label>Product Name</label>
@@ -87,6 +122,22 @@ export default function ProductForm({
             <option value={category._id}>{category.name}</option>
           ))}
       </select>
+      {propertiesToFill.length > 0 &&
+        propertiesToFill.map((property) => (
+          <div className="flex gap-1">
+            <div>{property.name}</div>
+            <select
+              value={productProperties[property.name]}
+              onChange={(event) =>
+                setProductProperty(property.name, event.target.value)
+              }
+            >
+              {property.values.map((value) => (
+                <option value={value}>{value}</option>
+              ))}
+            </select>
+          </div>
+        ))}
       <label>Photos </label>
       <div className="mb-2 flex flex-wrap gap-1">
         <ReactSortable
