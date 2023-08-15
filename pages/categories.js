@@ -84,6 +84,15 @@ function Categories({ swal }) {
     });
   }
 
+  function removeProperty(index) {
+    setProperties((prev) => {
+      const newProperties = [...prev];
+      return newProperties.filter((property, propertyIndex) => {
+        return true;
+      });
+    });
+  }
+
   return (
     <Layout>
       <h1>Categories</h1>
@@ -126,6 +135,8 @@ function Categories({ swal }) {
                 <input
                   type="text"
                   value={property.name}
+                  className="mb-0"
+                  placeholder="Property name (example: color)"
                   onChange={(event) =>
                     handlePropertyNameChange(
                       index,
@@ -133,10 +144,12 @@ function Categories({ swal }) {
                       event.target.value
                     )
                   }
-                  placeholder="Property name (example: color)"
                 />
                 <input
                   type="text"
+                  value={property.values}
+                  className="mb-0"
+                  placeholder="Values, comma seperated"
                   onChange={(event) =>
                     handlePropertyValueChange(
                       index,
@@ -144,9 +157,10 @@ function Categories({ swal }) {
                       event.target.value
                     )
                   }
-                  value={property.values}
-                  placeholder="Values, comma seperated"
                 />
+                <button onClick={removeProperty(index)} className="btn-default">
+                  Remove
+                </button>
               </div>
             ))}
         </div>
