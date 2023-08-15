@@ -126,20 +126,24 @@ export default function ProductForm({
       </select>
       {propertiesToFill.length > 0 &&
         propertiesToFill.map((property) => (
-          <div className="flex gap-1" key={property.name}>
-            <div>{property.name}</div>
-            <select
-              value={productProperties[property.name]}
-              onChange={(event) =>
-                setProductProperty(property.name, event.target.value)
-              }
-            >
-              {property.values.map((value) => (
-                <option key={value} value={value}>
-                  {value}
-                </option>
-              ))}
-            </select>
+          <div className="" key={property.name}>
+            <label>
+              {property.name[0].toUpperCase() + property.name.substring(1)}
+            </label>
+            <div>
+              <select
+                value={productProperties[property.name]}
+                onChange={(event) =>
+                  setProductProperty(property.name, event.target.value)
+                }
+              >
+                {property.values.map((value) => (
+                  <option key={value} value={value}>
+                    {value}
+                  </option>
+                ))}
+              </select>
+            </div>
           </div>
         ))}
       <label>Photos </label>
@@ -151,8 +155,8 @@ export default function ProductForm({
         >
           {!!images?.length &&
             images.map((link) => (
-              <div key={link} className="inline-block h-24">
-                <img src={link} alt="" className="rounded-lg"></img>
+              <div key={link} className="h-24">
+                <img src={link} alt="" className="rounded-md"></img>
               </div>
             ))}
         </ReactSortable>
@@ -161,7 +165,10 @@ export default function ProductForm({
             <Spinner />
           </div>
         )}
-        <label className="w-24 h-24 cursor-pointer inline-block flex items-center justify-center text-sm gap-1 text-black-500 rounded-lg bg-gray-300">
+        <label
+          className="w-24 h-24 cursor-pointer inline-block flex flex-col items-center justify-center
+         text-sm gap-1 text-primary rounded-md bg-gray-300 bg-white shadow-sm border border-gray-200"
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -176,7 +183,7 @@ export default function ProductForm({
               d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5"
             />
           </svg>
-          <div>Upload</div>
+          <div className="text-primary">Upload</div>
           <input type="file" className="hidden" onChange={uploadImages} />
         </label>
       </div>
