@@ -6,6 +6,7 @@ export default function Categories() {
   const [name, setName] = useState("");
   const [categories, setCategories] = useState([]);
   const [parentCategory, setParentCategory] = useState("");
+  const [editedCategory, setEditedCategory] = useState(null);
 
   useEffect(() => {
     fetchCategories();
@@ -19,15 +20,32 @@ export default function Categories() {
 
   async function saveCatagory(event) {
     event.preventDefault();
-    await axios.post("/api/categories", { name, parentCategory });
+    const data = { name, parentCategory };
+    if (editedCategory) {
+      data._id = editedCategory._id;
+      await axios.put("/api/categories", data);
+      setEditedCategory(null);
+    } else {
+      await axios.post("/api/categories", data);
+    }
     setName("");
     fetchCategories();
+  }
+
+  function editCategory(category) {
+    setEditedCategory(category);
+    setName(category.name);
+    setParentCategory(category.parent?._id);
   }
 
   return (
     <Layout>
       <h1>Categories</h1>
-      <label>New category name</label>
+      <label>
+        {editedCategory
+          ? `Edit category ${editedCategory.name}`
+          : "Create new category"}{" "}
+      </label>
       <form onSubmit={saveCatagory} className="flex gap-1">
         <input
           className="mb-0"
