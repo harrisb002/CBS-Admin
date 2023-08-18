@@ -17,7 +17,7 @@ export default function Products() {
       <Link className="btn-primary" href={"/products/new"}>
         Add new Product
       </Link>
-      <table className="basic mt-4">
+      <table className="basic mt-6 table-large ">
         <thead>
           <tr>
             <td>Product Name</td>
