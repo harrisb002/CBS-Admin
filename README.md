@@ -10,14 +10,15 @@ This is the Admin panel used to update the front end of an E-commerce site that 
   - Categories/user login not implemented as of yet
 - Receipts given through stripe 💸
   
-## Dashboard 🏠
-<img src="" width="450"/>
+## Auth & Dashboard  🏠
+<img src="https://github.com/harrisb002/CBS-Admin/blob/main/Auth.png" width="350"/> <img src="https://github.com/harrisb002/CBS-Admin/blob/main/Products.png" width="350"/>
+
 
 ## Categories 🎨
-<img src="" width="300"/> <img src="" width="400"/>
+<img src="https://github.com/harrisb002/CBS-Admin/blob/main/Categories.png" width="350"/> 
 
 ## Billing 💰🛒
-<img src="" width="300"/> <img src="" width="400"/>
+<img src="https://github.com/harrisb002/CBS-Admin/blob/main/Reciept.png" width="700"/>
 
 ## This app can be deployed on Vercel
 
