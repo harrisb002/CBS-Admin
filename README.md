@@ -1,34 +1,25 @@
-# CBS Admin
+# CBS Admin 🧶 🏢 🧶
+### Admin Panel for E-Commerce Site made for Crocheted Plushies
 
-This is the admin-side for the E-commerce site for crocheted plushies with/without organic lavender pouch inside made by Sarah Pretley.
+## Admin Details 📊
+This is the Admin panel used to update the front end of an E-commerce site that sells crocheted plushies.
+- 🍃 MongoDB: Allows authorized admin to add/remove products through interacting with the MongoDB connected.
+- ‼️ Next.js: This app utilizes next.js for next auth
+- 🌪️ Tailwind 
+- Navbar grants access to mutating and arranging the Inventory and checking orders
+  - Categories/user login not implemented as of yet
+- Receipts given through stripe 💸
+  
+## Dashboard 🏠
+<img src="" width="450"/>
 
-## Contact Info
+## Categories 🎨
+<img src="" width="300"/> <img src="" width="400"/>
 
-•Phone: 707-330-9219
+## Billing 💰🛒
+<img src="" width="300"/> <img src="" width="400"/>
 
-•Instagram: crochetbyserp
-
-•Email: sarahprestley7524@gmail.com
-
-# Admin Details
-
-## MongoDB:
-
-This app will allow the privledged users to deploy CRUD operations on products through the MongoDB connected.
-
-## GoogleCloud:
-
-This app will utilize google cloud to use authentication through google sign-in. Other sign-in methods will be added in time.
-
-## Next.js:
-
-This app will utilize next.js for routing pages and for server-side rendering
-
-## CSS:
-
-Tailwind will be utilized in this app as well as styled components for css
-
-## This app will be deployed on Vercel
+## This app can be deployed on Vercel
 
 [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
