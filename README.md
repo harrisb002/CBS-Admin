@@ -1,6 +1,6 @@
 # CBS Admin 🧶 🏢 🧶
 ### Admin Panel for E-Commerce Site made for Crocheted Plushies
-
+- Frontend Repo: https://github.com/harrisb002/CBS-Front
 ## Admin Details 📊
 This is the Admin panel used to update the front end of an E-commerce site that sells crocheted plushies.
 - 🍃 MongoDB: Allows authorized admin to add/remove products through interacting with the MongoDB connected.
